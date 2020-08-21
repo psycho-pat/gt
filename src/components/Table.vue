@@ -1,12 +1,12 @@
 <template>
   <ol>
-    <li v-for="([i, place], idx) of sorted" :key="i">
+    <li v-for="[i, place] of sorted" :key="i">
       <Card
         :g="score.gents[i]"
-        :round="score.last"
-        :comp="comp"
+        :round="roundMode ? round : score.last"
+        :comp="compMode ? comp : null"
         :place="place"
-        :indicator="previous[idx] - i"
+        :indicator="previous.get(i) - place"
       />
     </li>
   </ol>
@@ -24,13 +24,18 @@ export default {
   props: {
     score: Score,
     comp: [Number, null],
+    round: [Number, null],
   },
   computed: {
+    roundMode() {
+      return Number.isFinite(this.round);
+    },
+    compMode() {
+      return !this.roundMode && Number.isFinite(this.comp);
+    },
     sorted() {
-      const scores = this.score.gents.map(g => [
-        g.total(this.score.last),
-        g.idx,
-      ]);
+      const ref = this.roundMode ? this.round : this.score.last;
+      const scores = this.score.gents.map(g => [g.total(ref), g.idx]);
       scores.sort(([a], [b]) => b - a);
       const places = [];
       let lastScore = -1;
@@ -47,15 +52,31 @@ export default {
       return places;
     },
     previous() {
-      if (this.score.last > 0) {
-        const scores = this.score.gents.map(g => [
-          g.total(this.score.last - 1),
-          g.idx,
-        ]);
+      let ref = this.score.last - 1;
+      if (this.compMode) {
+        ref = this.comp;
+      }
+      if (this.roundMode) {
+        ref = this.round - 1;
+      }
+      if (ref >= 0) {
+        const scores = this.score.gents.map(g => [g.total(ref), g.idx]);
         scores.sort(([a], [b]) => b - a);
-        return scores.map(([, idx]) => idx);
+        const places = new Map();
+        let lastScore = -1;
+        let place = 0;
+
+        for (let i = 0; i < scores.length; i += 1) {
+          const [score, idx] = scores[i];
+          if (lastScore !== score) {
+            place = i + 1;
+          }
+          lastScore = score;
+          places.set(idx, place);
+        }
+        return places;
       } else {
-        return this.sorted;
+        return new Map(this.sorted);
       }
     },
   },
@@ -65,7 +86,11 @@ export default {
 <style scoped>
 ol {
   list-style-type: none;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  max-height: 90vh;
+  padding: 0;
+  margin: 0;
+  grid-auto-flow: column;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
 }
 </style>

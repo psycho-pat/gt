@@ -1,13 +1,39 @@
 <template>
-  <main class="Table">
-    <h1>Table</h1>
-    <select id="comp" v-model="comp">
-      <option :value="null" selected> - </option>
-      <option v-for="round of score.rounds" :key="round.idx" :value="round.idx">
-        {{ round.name }}
-      </option>
-    </select>
-    <Table :score="score" :comp="comp" />
+  <h1 v-if="loading">Loading …</h1>
+  <main v-else class="Table">
+    <header>
+      <h1>
+        Gentlemen Tournament 2020 - {{ score.last + 1 }}:
+        {{ score.rounds[score.last].name }}
+      </h1>
+    </header>
+    <Table class="table" :score="score" :comp="comp" :round="round" />
+    <footer>
+      <nav>
+        <label for="comp">Ref:</label>
+        <select id="comp" v-model="comp">
+          <option :value="null" selected> - </option>
+          <option
+            v-for="round of score.rounds.slice(0, score.last)"
+            :key="round.idx"
+            :value="round.idx"
+          >
+            {{ round.name }}
+          </option>
+        </select>
+        <label for="round">Round:</label>
+        <select id="round" v-model="round">
+          <option :value="null" selected> - </option>
+          <option
+            v-for="round of score.rounds.slice(0, score.last)"
+            :key="round.idx"
+            :value="round.idx"
+          >
+            {{ round.name }}
+          </option>
+        </select>
+      </nav>
+    </footer>
   </main>
 </template>
 
@@ -20,12 +46,44 @@ export default {
   components: {
     Table,
   },
+  async mounted() {
+    this.score = await update();
+    this.loading = false;
+  },
   data() {
-    const score = update();
     return {
-      score,
+      loading: true,
+      score: null,
       comp: null,
+      round: null,
     };
   },
 };
 </script>
+
+<style scoped>
+h1,
+h2,
+h3,
+nav {
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+h1 {
+  font-size: 3em;
+  font-weight: bolder;
+}
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+header, footer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+</style>

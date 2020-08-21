@@ -13,7 +13,6 @@ export class Gentleman {
     this.points = [];
   }
   total(round, comp) {
-    console.log(comp);
     return sum(this.points.slice(0, Number.isFinite(comp) ? comp : round + 1));
   }
   diff(round, comp) {

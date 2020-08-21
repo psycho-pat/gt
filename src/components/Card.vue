@@ -7,6 +7,7 @@
     <div class="score">
       <span>{{ score }}</span
       ><span v-if="comp !== null"> (+{{ diff }}) </span>
+      <span v-else> (+{{ g.points[round] }}) </span>
     </div>
   </section>
 </template>
@@ -29,7 +30,7 @@ export default {
   components: { Avatar, Indicator, Place },
   computed: {
     score() {
-      return this.g.total(this.round, this.comp);
+      return this.g.total(this.round);
     },
     diff() {
       return this.g.diff(this.round, this.comp);
@@ -43,10 +44,10 @@ export default {
   margin: 0.5em;
   background-color: linen;
   max-width: max-content;
-
 }
 img.avatar {
   width: 10em;
+  height: 10em;
   grid-row: 1 / 3;
 }
 .indicator {

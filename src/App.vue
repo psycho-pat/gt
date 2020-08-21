@@ -1,14 +1,15 @@
 <template>
   <main id="app">
-    <nav id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/board">Board</router-link>
-    </nav>
     <router-view />
   </main>
 </template>
 
 <style>
+body,
+html {
+  padding: 0;
+  margin: 0;
+}
 #nav {
   padding: 2em;
 }
