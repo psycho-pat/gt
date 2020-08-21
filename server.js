@@ -60,7 +60,7 @@ async function listMajors(auth) {
     let res = await util
       .promisify(sheets.spreadsheets.values.get)
       .call(sheets.spreadsheets.values, {
-        spreadsheetId: "1V14tYmX3eWTW2ppYhv0Hi3zHT7l7NGf_cfkxpVHi0Bk",
+        spreadsheetId: "1VKmPW7Bcw_rnBLHkZRMN9tISPBlAYCLBXSpkPLbnuik",
         range: "Overview!A1:R28",
       });
     return res.data.values;

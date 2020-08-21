@@ -3,7 +3,7 @@
   <main v-else class="Table">
     <header>
       <h1>
-        Gentlemen Tournament 2020 - {{ score.last + 1 }}:
+        Gentlemen Tournament 2020 - {{ score.last }}:
         {{ score.rounds[score.last].name }}
       </h1>
     </header>
@@ -79,11 +79,20 @@ main {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  height: 100%;
 }
 header, footer {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
+}
+
+footer {
+  margin-top: auto;
+}
+footer label {
+  padding-right: 1em;
+  padding-left: 2em;
 }
 </style>

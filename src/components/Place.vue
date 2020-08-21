@@ -30,13 +30,13 @@ export default {
 
 <style scoped>
 .num {
-  font-size: 3em;
+  font-size: 4em;
   font-weight: bolder;
 }
 .suf {
   font-size: 1em;
-  padding-bottom: 1em;
-  padding-top: 0.5em;
+  padding-bottom: 2em;
+  padding-top: 1em;
 }
 .place {
   display: flex;

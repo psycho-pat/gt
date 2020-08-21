@@ -5,7 +5,7 @@
     <div class="name">{{ g.name }}</div>
     <Indicator class="indicator" :indicator="indicator" />
     <div class="score">
-      <span>{{ score }}</span
+      <span class="total">{{ score }}</span
       ><span v-if="comp !== null"> (+{{ diff }}) </span>
       <span v-else> (+{{ g.points[round] }}) </span>
     </div>
@@ -42,8 +42,10 @@ export default {
 <style scoped>
 .card {
   margin: 0.5em;
-  background-color: linen;
+  background-color: rgba(0, 0, 0, 0.2);
   max-width: max-content;
+  border: solid rgba(0, 0, 0, 0.5) 0.3em;
+  border-radius: 0.3em;
 }
 img.avatar {
   width: 10em;
@@ -55,6 +57,7 @@ img.avatar {
   height: 3em;
   justify-self: center;
   align-self: center;
+  margin-left: 2em;
 }
 .card {
   display: grid;
@@ -64,14 +67,19 @@ img.avatar {
   font-size: 2em;
   justify-self: center;
   align-self: center;
+  font-weight: bolder;
 }
 .place {
   justify-self: center;
   align-self: center;
+  margin-left: 2em;
 }
 .score {
   font-size: 2em;
   justify-self: center;
   align-self: center;
+}
+.total {
+  font-weight: bold;
 }
 </style>

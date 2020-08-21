@@ -12,7 +12,7 @@
     />
     <polygon
       v-else
-      points="10,25 90,25 90,75 10,75"
+      points="10,35 90,35 90,65 10,65"
       style="fill:grey;stroke-width:0"
     />
   </svg>

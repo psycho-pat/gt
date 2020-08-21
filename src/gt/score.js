@@ -3,7 +3,7 @@ import { Gentleman, Round } from ".";
 export class Score {
   constructor(raw) {
     const [header, ...lines] = raw.slice(1, -2);
-    const names = header.slice(3, -1);
+    const names = header.slice(3);
     this.gents = names.map((name, idx) => new Gentleman(name, idx));
     console.log(this.gents);
     const rounds = [];
@@ -15,7 +15,7 @@ export class Score {
     let last = null;
     for (let idx = 0; idx < linesWith0.length; idx += 1) {
       const line = linesWith0[idx];
-      let [name, typ, max, ...score] = line.slice(0, -1);
+      let [name, typ, max, ...score] = line.slice(0);
       const finished = score.includes("");
       if (last === null && finished) {
         last = idx - 1;
