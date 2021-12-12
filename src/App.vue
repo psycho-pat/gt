@@ -12,6 +12,13 @@ html {
   height: 100vh;
   font-family: "Fira Sans";
 }
+@media (max-width: 50em) {
+  body,
+  html {
+    height: initial;
+    font-size: 2.5vw;
+  }
+}
 #nav {
   padding: 2em;
 }

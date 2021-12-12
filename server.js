@@ -1,6 +1,6 @@
 const util = require("util");
 const express = require("express");
-const { createProxyMiddleware } = require('http-proxy-middleware');
+const { createProxyMiddleware } = require("http-proxy-middleware");
 const fs = require("fs").promises;
 const readline = require("readline");
 const { google } = require("googleapis");
@@ -75,7 +75,13 @@ async function run() {
     const client = await authorize(JSON.parse(content));
     const app = express();
     const port = 8888;
-    const apiProxy = createProxyMiddleware('http://localhost:8080/');
+    const apiProxy = createProxyMiddleware({
+      target: "http://127.0.0.1:8080/",
+      changeOrigin: true,
+      headers: {
+        Connection: "keep-alive",
+      },
+    });
 
     app.get("/update", async (_, res) => {
       const list = await listMajors(client);
@@ -84,7 +90,7 @@ async function run() {
     app.use("/", apiProxy);
 
     app.listen(port, () => {
-      console.log(`Example app listening at http://localhost:${port}`);
+      console.log(`Example app listening at http://127.0.0.1:${port}`);
     });
   } catch (err) {
     console.log("Error loading client secret file:", err);

@@ -1,6 +1,6 @@
 <template>
   <section class="card">
-    <Avatar class="avatar" :g="g" :indicator="indicator" />
+    <Avatar class="avatar" :g="g" :indicator="indicator" :first="place === 1"/>
     <Place :place="place" />
     <div class="name">{{ g.name }}</div>
     <Indicator class="indicator" :indicator="indicator" />

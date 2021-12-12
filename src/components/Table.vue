@@ -93,4 +93,15 @@ ol {
   grid-auto-flow: column;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
 }
+@media (max-width: 50em) {
+  ol {
+    list-style-type: none;
+    display: grid;
+    padding: 0;
+    margin: 0;
+    grid-auto-flow: row;
+    grid-template-columns: 1fr;
+  max-height: initial;
+  }
+}
 </style>

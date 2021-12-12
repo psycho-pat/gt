@@ -49,6 +49,11 @@ export default {
   async mounted() {
     this.score = await update();
     this.loading = false;
+    setInterval(async () => {
+      this.loading = true;
+      this.score = await update();
+      this.loading = false;
+    }, 60000);
   },
   data() {
     return {
@@ -81,7 +86,8 @@ main {
   justify-content: center;
   height: 100%;
 }
-header, footer {
+header,
+footer {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -89,7 +95,7 @@ header, footer {
 }
 
 footer {
-  margin-top: auto;
+  margin-top: 1em;
 }
 footer label {
   padding-right: 1em;
