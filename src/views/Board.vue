@@ -3,7 +3,7 @@
   <main v-else class="Table">
     <header>
       <h1>
-        Gentlemen Tournament 2020 - {{ score.last }}:
+        Gentlemen Tournament 2021 - Challenge {{ score.last }}:
         {{ score.rounds[score.last].name }}
       </h1>
     </header>

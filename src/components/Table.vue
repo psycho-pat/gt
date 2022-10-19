@@ -91,7 +91,7 @@ ol {
   padding: 0;
   margin: 0;
   grid-auto-flow: column;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
 }
 @media (max-width: 50em) {
   ol {
