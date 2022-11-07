@@ -7,20 +7,9 @@
         {{ score.rounds[score.last].name }}
       </h1>
     </header>
-    <Table class="table" :score="score" :comp="comp" :round="round" />
+    <TableRB class="table" :score="score" :comp="comp" :round="round" />
     <footer>
       <nav>
-        <label for="comp">Ref:</label>
-        <select id="comp" v-model="comp">
-          <option :value="null" selected> - </option>
-          <option
-            v-for="round of score.rounds.slice(0, score.last)"
-            :key="round.idx"
-            :value="round.idx"
-          >
-            {{ round.name }}
-          </option>
-        </select>
         <label for="round">Round:</label>
         <select id="round" v-model="round">
           <option :value="null" selected> - </option>
@@ -38,20 +27,20 @@
 </template>
 
 <script>
-import Table from "@/components/Table.vue";
-import { update } from "@/gt";
+import TableRB from "@/components/Table_rb.vue";
+import { updateRB } from "@/gt";
 
 export default {
   name: "Board",
   components: {
-    Table,
+    TableRB,
   },
   async mounted() {
-    this.score = await update();
+    this.score = await updateRB();
     this.loading = false;
     setInterval(async () => {
       this.loading = true;
-      this.score = await update();
+      this.score = await updateRB();
       this.loading = false;
     }, 60000);
   },
@@ -59,7 +48,6 @@ export default {
     return {
       loading: true,
       score: null,
-      comp: null,
       round: null,
     };
   },

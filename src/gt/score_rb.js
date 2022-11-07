@@ -1,6 +1,6 @@
 import { Gentleman, Round } from ".";
 
-export class Score {
+export class ScoreRB {
   constructor(raw) {
     const [header, ...lines] = raw.slice(1, -1);
     const names = header.slice(4);
@@ -16,9 +16,9 @@ export class Score {
     for (let idx = 0; idx < linesWith0.length; idx += 1) {
       const line = linesWith0[idx];
       let [name, typ, typ2, max, ...score] = line.slice(0);
-	  //console.log(score);
+	    //console.log(score);
       //const finished = score.includes("");
-	  const finished = score.length !== this.gents.length;
+	    const finished = score.length !== this.gents.length;
       if (last === null && finished) {
         last = idx - 1;
       }
@@ -39,11 +39,11 @@ export class Score {
   }
 }
 
-export async function update() {
+export async function updateRB() {
   const res = await fetch("/update");
   const json = await res.json();
   //console.log(json);
-  const score = new Score(json);
+  const score = new ScoreRB(json);
   //console.log(score);
   return score;
 }

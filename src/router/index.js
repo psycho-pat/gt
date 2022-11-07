@@ -1,14 +1,20 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Board from "../views/Board.vue";
+import RoundBased from "../views/RoundBased.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/",
+    path: "/board",
     name: "Board",
     component: Board,
+  },
+  {
+    path: "/",
+    name: "RoundBased",
+    component: RoundBased,
   },
 ];
 

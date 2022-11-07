@@ -1,7 +1,7 @@
 <template>
   <ol>
     <li v-for="[i, place] of sorted" :key="i">
-      <Card
+      <CardRB
         :g="score.gents[i]"
         :round="roundMode ? round : score.last"
         :comp="compMode ? comp : null"
@@ -13,13 +13,13 @@
 </template>
 
 <script>
-import Card from "@/components/Card";
+import CardRB from "@/components/Card_rb";
 import { Score } from "@/gt";
 
 export default {
-  name: "Table",
+  name: "TableRB",
   components: {
-    Card,
+    CardRB,
   },
   props: {
     score: Score,
@@ -35,10 +35,10 @@ export default {
     },
     sorted() {
       const ref = this.roundMode ? this.round : this.score.last;
-      const scores = this.score.gents.map(g => [g.total(ref), g.idx]);
-      //const scores = this.score.gents.map(g => [g.diff(ref), g.idx]);
+      //const scores = this.score.gents.map(g => [g.total(ref), g.idx]);
+      const scores = this.score.gents.map(g => [g.diff(ref,ref), g.idx]);
       scores.sort(([a], [b]) => b - a);
-      //console.log(scores);
+      console.log(scores,ref);
       const places = [];
       let lastScore = -1;
       let place = 0;
@@ -51,7 +51,7 @@ export default {
         lastScore = score;
         places.push([idx, place]);
       }
-      console.log(places);
+      //console.log(places);
       return places;
     },
     previous() {
@@ -63,8 +63,8 @@ export default {
         ref = this.round - 1;
       }
       if (ref >= 0) {
-        const scores = this.score.gents.map(g => [g.total(ref), g.idx]);
-        //const scores = this.score.gents.map(g => [g.diff(ref), g.idx]);
+        //const scores = this.score.gents.map(g => [g.total(ref), g.idx]);
+        const scores = this.score.gents.map(g => [g.diff(ref,ref), g.idx]);
         scores.sort(([a], [b]) => b - a);
         const places = new Map();
         let lastScore = -1;

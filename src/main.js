@@ -3,7 +3,7 @@ import App from "./App.vue";
 import router from "./router";
 
 Vue.config.productionTip = false;
-document.title = "GT2021";
+document.title = "GT2022";
 
 new Vue({
   router,
