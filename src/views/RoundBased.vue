@@ -12,13 +12,13 @@
       <nav>
         <label for="round">Round:</label>
         <select id="round" v-model="round">
-          <option :value="null" selected> - </option>
+          <option :value="null" selected> latest </option>
           <option
             v-for="round of score.rounds.slice(0, score.last)"
             :key="round.idx"
             :value="round.idx"
           >
-            {{ round.name }}
+            {{ round.idx }} - {{ round.name }}
           </option>
         </select>
       </nav>
@@ -74,7 +74,6 @@ main {
   justify-content: center;
   height: 100%;
 }
-
 header,
 footer {
   display: flex;

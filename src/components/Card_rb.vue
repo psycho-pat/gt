@@ -1,11 +1,11 @@
 <template>
-  <section class="card">
+  <section class="card" :style="style">
     <Avatar class="avatar" :g="g" :indicator="indicator" :first="place === 1"/>
     <Place :place="place" />
     <div class="name">{{ g.name }}</div>
     <Indicator class="indicator" :indicator="indicator" />
     <div class="score">
-      <span class="total">{{ diff }}</span>
+      <span class="total">+{{ diff }}</span>
     </div>
   </section>
 </template>
@@ -33,16 +33,31 @@ export default {
     diff() {
       return this.g.diff(this.round, this.round );
     },
+    style () {
+      if (this.place == 1){
+        return 'border-color: ' + '#d6af36';
+      }
+      else if (this.place == 2){
+        return 'border-color: ' + '#a7a7ad';
+      }
+      else if (this.place == 3){
+        return 'border-color: ' + '#a77044';
+      }
+      else{
+        return 'border-color: ' + 'black';
+      }
+    },
   },
 };
 </script>
 
 <style scoped>
-.card {
+.card{
   margin: 0.5em;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.1);
   max-width: max-content;
-  border: solid rgba(0, 0, 0, 0.5) 0.3em;
+  border: solid 0.4em;
+  border-color: rgba(0, 0, 0, 1);
   border-radius: 0.3em;
 }
 img.avatar {
